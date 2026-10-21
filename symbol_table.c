@@ -1,12 +1,10 @@
 /*
- * Symbol table implemented in C as a hash table with separate chaining.
- * Each bucket is a linked list of nodes. A symbol's position in the table is
- * the pair (bucket index, index inside the bucket). Identifiers and constants
- * are kept in the same table.
- *
- * Compiled as a shared library and used from the Python scanner:
- *   Linux/Mac: gcc -shared -fPIC -o st_lib.so symbol_table.c
- *   Windows:   gcc -shared -o st_lib.dll symbol_table.c
+Symbol table implemented in C as a hash table with separate chaining. Each bucket is a linked list of nodes. A symbol's position in the table is the pair (bucket index, index inside the bucket). Identifiers and 
+constants are kept in the same table.
+
+Compiled as a shared library and used from the Python scanner:
+Linux/Mac: gcc -shared -fPIC -o st_lib.so symbol_table.c
+Windows:   gcc -shared -o st_lib.dll symbol_table.c
  */
 
 #include <stdio.h>
@@ -45,8 +43,7 @@ int st_hash(SymbolTable *st, const char *key)
     return total % st->size;
 }
 
-/* looks for key; if found, writes its position in *bucket and *index and
-   returns 1, otherwise returns 0 */
+/* looks for key; if found, writes its position in *bucket and *index and returns 1, otherwise returns 0 */
 int st_search(SymbolTable *st, const char *key, int *bucket, int *index)
 {
     int b = st_hash(st, key);
@@ -62,9 +59,7 @@ int st_search(SymbolTable *st, const char *key, int *bucket, int *index)
     return 0;
 }
 
-/* adds key if it is not already in the table and writes its position in
-   *bucket and *index. New keys go at the end of the list, so positions that
-   were already given out never change. */
+/* adds key if it is not already in the table and writes its position in *bucket and *index. New keys go at the end of the list, so positions that were already given out never change. */
 void st_add(SymbolTable *st, const char *key, int *bucket, int *index)
 {
     if (st_search(st, key, bucket, index))
