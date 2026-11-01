@@ -1,0 +1,85 @@
+---- constants ----
+
+1. fa from constant_fa.txt
+M = (Q, Sigma, delta, q0, F)
+Q = {q0, q1, q2, q3, q4}
+Sigma = {zero, nonzero, digit, quote, strchar}
+q0 = q0
+F = {q1, q2, q4}
+delta:
+delta(q0, zero) = q1
+delta(q0, nonzero) = q2
+delta(q2, digit) = q2
+delta(q0, quote) = q3
+delta(q3, strchar) = q3
+delta(q3, quote) = q4
+
+transition table (-> is initial, * is final):
+            zero     nonzero  digit    quote    strchar  
+-> q0       q1       q2       -        q3       -        
+  *q1       -        -        -        -        -        
+  *q2       -        -        q2       -        -        
+   q3       -        -        -        q4       q3       
+  *q4       -        -        -        -        -        
+deterministic: yes
+
+2. rg made from this fa (fa -> rg)
+G = (N, Sigma, P, S)
+N = {q0, q1, q2, q3, q4}
+Sigma = {zero, nonzero, digit, quote, strchar}
+S = q0
+P:
+q0 -> zero q1 | zero | nonzero q2 | nonzero | quote q3
+q2 -> digit q2 | digit
+q3 -> strchar q3 | quote q4 | quote
+regular: yes
+
+3. rg from constant_rg.txt
+G = (N, Sigma, P, S)
+N = {S, N, C}
+Sigma = {zero, nonzero, digit, quote, strchar}
+S = S
+P:
+S -> zero | nonzero N | nonzero | quote C
+N -> digit N | digit
+C -> strchar C | quote
+regular: yes
+
+4. fa made from this rg (rg -> fa)
+M = (Q, Sigma, delta, q0, F)
+Q = {S, N, C, K}
+Sigma = {zero, nonzero, digit, quote, strchar}
+q0 = S
+F = {K}
+delta:
+delta(S, zero) = K
+delta(S, nonzero) = {N, K}
+delta(S, quote) = C
+delta(N, digit) = {N, K}
+delta(C, strchar) = C
+delta(C, quote) = K
+
+transition table (-> is initial, * is final):
+            zero     nonzero  digit    quote    strchar  
+-> S        K        {N,K}    -        C        -        
+   N        -        -        {N,K}    -        -        
+   C        -        -        -        K        C        
+  *K        -        -        -        -        -        
+deterministic: no
+
+5. checking some words
+A = fa from the file, B = fa made from the rg file, C = fa -> rg -> fa
+word                    A         B         C         
+0                       accepted  accepted  accepted  
+7                       accepted  accepted  accepted  
+120                     accepted  accepted  accepted  
+"hello world"           accepted  accepted  accepted  
+""                      accepted  accepted  accepted  
+"Score: 10!"            accepted  accepted  accepted  
+007                     rejected  rejected  rejected  
+-5                      rejected  rejected  rejected  
+"open                   rejected  rejected  rejected  
+"bad#"                  rejected  rejected  rejected  
+epsilon (empty word)    rejected  rejected  rejected  
+all 3 give the same answer: yes
+

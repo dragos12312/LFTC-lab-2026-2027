@@ -1,0 +1,222 @@
+lab 4 - finite automata and regular grammars for identifiers and constants
+
+1. files
+
+classes.txt - the classes of chars (letter, digit, zero, nonzero, underscore, quote, strchar)
+identifier_fa.txt - fa for identifiers
+constant_fa.txt - fa for constants (numbers and strings)
+identifier_rg.txt - rg for identifiers
+constant_rg.txt - rg for constants
+fa.py - the FA class, reads a fa from a file, prints it and checks words
+rg.py - the RG class, reads a rg from a file, checks if its regular and prints it
+transform.py - the transformations fa_to_rg and rg_to_fa
+main.py - runs everything
+output/ - identifier_results.txt and constant_results.txt, what the demo prints
+
+how to run (on my pc its py -3.12 instead of python3):
+python3 main.py - the demo for identifiers and constants, also saved in output
+python3 main.py fa identifier_fa.txt - prints the fa and the rg made from it
+python3 main.py rg constant_rg.txt - prints the rg and the fa made from it
+python3 main.py check identifier_rg.txt total_sum - says if the word is accepted (works with a fa file or a rg file)
+
+
+2. definitions
+
+2.1 finite automaton
+
+a finite automaton is M = (Q, Sigma, delta, q0, F) where
+Q - finite set of states
+Sigma - the alphabet
+delta - the transition function, delta : Q x Sigma -> P(Q)
+q0 - the initial state, q0 in Q
+F - the final states, F included in Q
+
+if delta(q, a) has at most one state for every q and a then its deterministic (dfa), if not its nondeterministic (nfa).
+
+a configuration is (q, w), the state we are in and what is left to read.
+a move is (p, aw) |- (q, w) if q is in delta(p, a).
+the accepted language is L(M) = { w in Sigma* | (q0, w) |-* (qf, epsilon), qf in F }
+so a word is accepted if we start in q0, read all of it and can end in a final state.
+
+2.2 regular grammar
+
+a grammar is G = (N, Sigma, P, S) where N are the nonterminals, Sigma the terminals, P the productions and S the start symbol.
+
+G is regular (right linear) if all productions look like
+A -> aB (A, B nonterminals, a terminal)
+A -> a
+S -> epsilon, only for the start symbol and only if S doesnt appear on the right side of any production
+
+the generated language is L(G) = { w in Sigma* | S =>* w }.
+
+a language is regular iff some fa accepts it iff some regular grammar generates it. the transformations in part 5 show this both ways.
+
+2.3 classes of chars
+
+writing every letter as its own symbol means 52 transitions only for letters, so i used classes, they are in classes.txt:
+letter = A-Z a-z
+digit = 0-9
+zero = 0
+nonzero = 1-9
+underscore = _
+quote = "
+strchar = A-Z a-z 0-9 space : , . ! ? _ - (the chars allowed in a string)
+
+a transition q --letter--> p is really one transition for every char in letter. if you replace each class with its chars you get the same fa / rg over single chars, so its just a shorter way to write it. when checking a word a char can take a transition if its in the class of that transition.
+
+
+3. identifiers and constants in my language
+
+from the grammar (lab 1 / lab 2) and the scanner from lab 3:
+
+identifier ::= letter identifier_tail
+identifier_tail ::= letter_or_digit_or_underscore identifier_tail | epsilon
+so a letter and then letters, digits or _ (regex [A-Za-z][A-Za-z0-9_]*)
+
+number ::= "0" | nonzero_digit number_tail
+number_tail ::= digit number_tail | epsilon
+so 0 or a number that doesnt start with 0 (regex 0|[1-9][0-9]*). there are no negative constants, minus is the operator INDEPENDENCE.
+
+string ::= '"' characters '"'
+characters ::= character characters | epsilon
+so a quote, allowed chars and a quote (regex "[A-Za-z0-9 :,.!?_-]*")
+
+a constant is a number or a string.
+
+reserved words like RECRUIT or GRIND also look like identifiers so the fa accepts them. thats fine because the scanner checks reserved words first (lab 3), the fa only says what an identifier looks like.
+
+
+4. the fa and rg
+
+4.1 identifiers
+
+fa (identifier_fa.txt):
+Q = {q0, q1}, Sigma = {letter, digit, underscore}, q0 = q0, F = {q1}
+
+state | letter | digit | underscore
+-> q0 | q1 | - | -
+* q1 | q1 | q1 | q1
+
+(-> is the initial state, * is final)
+its deterministic. q0 means nothing was read yet, q1 means we have a valid identifier.
+
+rg (identifier_rg.txt):
+N = {S, A}, Sigma = {letter, digit, underscore}, start S
+S -> letter A | letter
+A -> letter A | digit A | underscore A | letter | digit | underscore
+
+example, a1_ is letter digit underscore:
+S => letter A => letter digit A => letter digit underscore
+
+4.2 constants
+
+fa (constant_fa.txt):
+Q = {q0, q1, q2, q3, q4}, Sigma = {zero, nonzero, digit, quote, strchar}, q0 = q0, F = {q1, q2, q4}
+
+state | zero | nonzero | digit | quote | strchar
+-> q0 | q1 | q2 | - | q3 | -
+* q1 | - | - | - | - | -
+* q2 | - | - | q2 | - | -
+q3 | - | - | - | q4 | q3
+* q4 | - | - | - | - | -
+
+q1 is the number 0, nothing can come after it so 007 is rejected
+q2 is a number starting with 1-9, then any digits
+q3 is inside a string after the first quote
+q4 is after the closing quote
+its deterministic because zero and nonzero dont overlap and quote is not in strchar.
+
+rg (constant_rg.txt):
+N = {S, N, C}, Sigma = {zero, nonzero, digit, quote, strchar}, start S
+S -> zero | nonzero N | nonzero | quote C
+N -> digit N | digit
+C -> strchar C | quote
+
+example, 120 is nonzero digit digit:
+S => nonzero N => nonzero digit N => nonzero digit digit
+example, "ok" is quote strchar strchar quote:
+S => quote C => quote strchar C => quote strchar strchar C => quote strchar strchar quote
+
+
+5. transformations
+
+5.1 fa to rg (fa_to_rg in transform.py)
+
+from M = (Q, Sigma, delta, q0, F) we make G = (N, Sigma, P, S):
+- N = Q, S = q0, terminals are the same as the alphabet
+- for every delta(p, a) = q we add p -> a q, and if q is final we also add p -> a
+- if q0 is final (the empty word is accepted) we add S -> epsilon. but if q0 is also the target of some transition that isnt allowed, so i add a new start q0' with all the productions of q0 plus q0' -> epsilon
+
+why it works: when the fa reads a and goes from p to q, the grammar replaces p with a q. so q0 =>* w p exactly when the fa can get from q0 to p by reading w. the last step into a final state uses p -> a which ends the derivation.
+
+for identifiers we get (the state names stay as nonterminals):
+q0 -> letter q1 | letter
+q1 -> letter q1 | letter | digit q1 | digit | underscore q1 | underscore
+which is the same as identifier_rg.txt with S = q0 and A = q1.
+
+5.2 rg to fa (rg_to_fa in transform.py)
+
+from G = (N, Sigma, P, S) we make M = (Q, Sigma, delta, q0, F):
+- Q = N plus a new state K, q0 = S, F = {K}
+- for every A -> a B, B goes in delta(A, a)
+- for every A -> a, K goes in delta(A, a)
+- if S -> epsilon then S is final too
+
+why it works: every step A => aB in a derivation is a move of the fa from A to B reading a, and the last step A => a goes to the final state K.
+
+the fa we get can be nondeterministic. for identifiers S -> letter A | letter gives delta(S, letter) = {A, K}:
+
+state | letter | digit | underscore
+-> S | {A,K} | - | -
+A | {A,K} | {A,K} | {A,K}
+* K | - | - | -
+
+thats why the FA class keeps a list of target states for every transition. when it checks a word it keeps the set of states it can be in, starts with {q0}, for each char goes to all the states it can reach from the current ones and at the end accepts if one of them is final.
+
+5.3 checks when reading the files
+- fa: all states in the transitions, the initial state and the final states have to be in Q and all symbols in Sigma
+- rg: every production has to be A -> a, A -> aB or S -> epsilon (a terminal, A and B nonterminals), and S cant be on a right side if theres S -> epsilon. if not the file is rejected and it says why
+
+
+6. file formats
+
+fa file:
+states: q0 q1
+alphabet: letter digit underscore
+initial: q0
+final: q1
+transitions:
+q0 letter q1
+(one transition per line, state symbol state)
+
+rg file:
+nonterminals: S A
+terminals: letter digit underscore
+start: S
+productions:
+S -> letter A | letter
+(| separates alternatives, epsilon is the empty word)
+
+lines starting with # are comments. a symbol thats not in classes.txt is just that char, so a fa over normal chars like a b works too.
+
+
+7. testing
+
+main.py does this for identifiers and for constants:
+1. reads the fa from the file and prints it (the 5-tuple and the transition table)
+2. turns it into a rg and prints it
+3. reads the rg from the file and prints it
+4. turns it into a fa and prints it
+5. checks some words with 3 automata: the fa from the file, the fa made from the rg file and the fa we get by doing fa -> rg -> fa. all 3 have to say the same thing, which shows the transformations keep the language
+
+the words and results (same for all 3):
+identifiers: x, total_sum, a1b2, Var_, RECRUIT are accepted
+1abc, _x, x-y, my var and the empty word are rejected
+constants: 0, 7, 120, "hello world", "", "Score: 10!" are accepted
+007, -5, "open, "bad#" and the empty word are rejected
+
+the full output is in output/identifier_results.txt and output/constant_results.txt.
+
+8. Github repo
+https://github.com/dragos12312/LFTC-lab-2026-2027
+This repo contains the code for this assignment. 

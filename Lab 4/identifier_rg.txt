@@ -1,0 +1,8 @@
+# rg for identifiers (right linear)
+# epsilon is the empty word, | separates the alternatives
+nonterminals: S A
+terminals: letter digit underscore
+start: S
+productions:
+S -> letter A | letter
+A -> letter A | digit A | underscore A | letter | digit | underscore

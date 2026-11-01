@@ -1,0 +1,14 @@
+# fa for constants, numbers and strings
+# number ::= "0" | nonzero_digit number_tail
+# string ::= '"' characters '"'
+states: q0 q1 q2 q3 q4
+alphabet: zero nonzero digit quote strchar
+initial: q0
+final: q1 q2 q4
+transitions:
+q0 zero q1
+q0 nonzero q2
+q2 digit q2
+q0 quote q3
+q3 strchar q3
+q3 quote q4

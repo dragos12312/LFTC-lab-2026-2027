@@ -1,0 +1,74 @@
+---- identifiers ----
+
+1. fa from identifier_fa.txt
+M = (Q, Sigma, delta, q0, F)
+Q = {q0, q1}
+Sigma = {letter, digit, underscore}
+q0 = q0
+F = {q1}
+delta:
+delta(q0, letter) = q1
+delta(q1, letter) = q1
+delta(q1, digit) = q1
+delta(q1, underscore) = q1
+
+transition table (-> is initial, * is final):
+               letter      digit       underscore  
+-> q0          q1          -           -           
+  *q1          q1          q1          q1          
+deterministic: yes
+
+2. rg made from this fa (fa -> rg)
+G = (N, Sigma, P, S)
+N = {q0, q1}
+Sigma = {letter, digit, underscore}
+S = q0
+P:
+q0 -> letter q1 | letter
+q1 -> letter q1 | letter | digit q1 | digit | underscore q1 | underscore
+regular: yes
+
+3. rg from identifier_rg.txt
+G = (N, Sigma, P, S)
+N = {S, A}
+Sigma = {letter, digit, underscore}
+S = S
+P:
+S -> letter A | letter
+A -> letter A | digit A | underscore A | letter | digit | underscore
+regular: yes
+
+4. fa made from this rg (rg -> fa)
+M = (Q, Sigma, delta, q0, F)
+Q = {S, A, K}
+Sigma = {letter, digit, underscore}
+q0 = S
+F = {K}
+delta:
+delta(S, letter) = {A, K}
+delta(A, letter) = {A, K}
+delta(A, digit) = {A, K}
+delta(A, underscore) = {A, K}
+
+transition table (-> is initial, * is final):
+               letter      digit       underscore  
+-> S           {A,K}       -           -           
+   A           {A,K}       {A,K}       {A,K}       
+  *K           -           -           -           
+deterministic: no
+
+5. checking some words
+A = fa from the file, B = fa made from the rg file, C = fa -> rg -> fa
+word                    A         B         C         
+x                       accepted  accepted  accepted  
+total_sum               accepted  accepted  accepted  
+a1b2                    accepted  accepted  accepted  
+Var_                    accepted  accepted  accepted  
+RECRUIT                 accepted  accepted  accepted  
+1abc                    rejected  rejected  rejected  
+_x                      rejected  rejected  rejected  
+x-y                     rejected  rejected  rejected  
+my var                  rejected  rejected  rejected  
+epsilon (empty word)    rejected  rejected  rejected  
+all 3 give the same answer: yes
+
