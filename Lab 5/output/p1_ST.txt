@@ -1,0 +1,9 @@
+Symbol table (hash table in C, size 31, 7 symbols)
+position   symbol
+(7, 0)     compare_power_and_lcm
+(16, 0)    m
+(17, 0)    n
+(19, 0)    "LCM is larger or equal"
+(27, 0)    x
+(27, 1)    "Power sum is larger"
+(28, 0)    y

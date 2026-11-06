@@ -1,0 +1,56 @@
+CREATE gcd FROM a AND b TOO
+GENESIS
+    RECRUIT r AS NUMBER
+    GRIND b OPPOSE 0 NONSTOP
+        r INHERITS a BONUS b
+        a INHERITS b
+        b INHERITS r
+    APOCALYPSE
+    STEAL a
+APOCALYPSE
+
+CREATE report FROM x AND y TOO
+GENESIS
+    GRADES "GCD:" AND gcd FROM x AND y TOO
+    GRADES "LCM:" AND x DIFF y
+    GRADES "Power sum:" AND x STATS y
+APOCALYPSE
+
+RECRUIT nums AS SQUAD
+RECRUIT i AS NUMBER
+RECRUIT count AS NUMBER
+RECRUIT total AS NUMBER
+RECRUIT g AS NUMBER
+
+nums INHERITS GANG 0 AND 0 AND 0 AND 0 AND 0 SCATTER
+count INHERITS 5
+i INHERITS 0
+GRIND i MOGGED count NONSTOP
+    SHOVE nums AT i
+    i INHERITS i ANNEX 1
+APOCALYPSE
+
+total INHERITS 0
+g INHERITS nums AT 0
+i INHERITS 0
+GRIND i MOGGED count NONSTOP
+    total INHERITS total ANNEX nums AT i
+    g INHERITS gcd FROM g AND nums AT i TOO
+    CONVICTED nums AT i BONUS 2 SAME 0 GUILTY
+        GRADES nums AT i AND "is even"
+    INNOCENT
+        GRADES nums AT i AND "is odd"
+    APOCALYPSE
+    i INHERITS i ANNEX 1
+APOCALYPSE
+
+GRADES "Sum:" AND total
+GRADES "Average:" AND total SPLIT count
+GRADES "Sum times 2 minus first:" AND FROM total MULTIPLY 2 TOO INDEPENDENCE nums AT 0
+GRADES "GCD of all numbers:" AND g
+
+CONVICTED g SAME 1 GUILTY
+    GRADES "The numbers are coprime"
+APOCALYPSE
+
+report FROM nums AT 0 AND nums AT 1 TOO

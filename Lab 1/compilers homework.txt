@@ -1,0 +1,48 @@
+RANDLANG DNF
+
+program ::= statement_list
+statement_list ::= statement statement_list | epsilon
+statement ::= decl_stmt | assign_stmt | input_stmt | output_stmt | if_stmt | while_stmt | def_stmt | return_stmt | expr_stmt
+
+decl_stmt ::= "RECRUIT" identifier "AS" type
+type ::= "NUMBER" | "SQUAD"
+assign_stmt ::= variable "INHERITS" expression
+variable ::= identifier | identifier "AT" term
+input_stmt ::= "SHOVE" variable
+output_stmt ::= "GRADES" expression expression_tail
+expression_tail ::= "AND" expression expression_tail | epsilon
+return_stmt ::= "STEAL" expression
+if_stmt ::= "CONVICTED" condition "GUILTY" statement_list else_part "APOCALYPSE"
+else_part ::= "INNOCENT" statement_list | epsilon
+while_stmt ::= "GRIND" condition "NONSTOP" statement_list "APOCALYPSE"
+def_stmt ::= "CREATE" identifier "FROM" parameters_opt "TOO" "GENESIS" statement_list "APOCALYPSE"
+parameters_opt ::= parameters | epsilon
+parameters ::= identifier parameters_tail
+parameters_tail ::= "AND" identifier parameters_tail | epsilon
+expr_stmt ::= expression
+
+expression ::= term expression_rest
+expression_rest ::= operator term expression_rest | epsilon
+term ::= identifier | number | string | "FROM" expression "TOO" | function_call | squad_access | squad_literal
+function_call ::= identifier "FROM" arguments_opt "TOO"
+squad_access ::= identifier "AT" term
+squad_literal ::= "GANG" arguments_opt "SCATTER"
+arguments_opt ::= arguments | epsilon
+arguments ::= expression arguments_tail
+arguments_tail ::= "AND" expression arguments_tail | epsilon
+condition ::= expression comparison_op expression
+
+operator ::= "SIMILARITY" (GCD) | "DIFF" (LCM) | "STATS" (power sum) | "ANNEX" (+) | "INDEPENDENCE" (-) | "MULTIPLY" (*) | "SPLIT" (/) | "BONUS" (%)
+comparison_op ::= "SAME" (==) | "OPPOSE" (!=) | "MOG" (>) | "MOGGED" (<) | "HTN" (>=) | "LTN" (<=)
+
+identifier ::= letter identifier_tail
+identifier_tail ::= letter_or_digit_or_underscore identifier_tail | epsilon
+letter_or_digit_or_underscore ::= letter | digit | "_"
+number ::= "0" | nonzero_digit number_tail
+number_tail ::= digit number_tail | epsilon
+nonzero_digit ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+digit ::= "0" | nonzero_digit
+string ::= '"' characters '"'
+characters ::= character characters | epsilon
+character ::= letter | digit | " " | ":" | "," | "." | "!" | "?" | "_" | "-"
+letter ::= "A" | ... | "Z" | "a" | ... | "z"

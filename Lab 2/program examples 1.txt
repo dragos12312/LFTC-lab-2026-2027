@@ -1,0 +1,41 @@
+Small program:
+
+CREATE compare_power_and_lcm FROM x AND y TOO
+GENESIS
+    CONVICTED x STATS y MOG x DIFF y GUILTY
+        STEAL "Power sum is larger"
+    INNOCENT
+        STEAL "LCM is larger or equal"
+    APOCALYPSE
+APOCALYPSE
+
+RECRUIT m AS NUMBER
+RECRUIT n AS NUMBER
+SHOVE m
+SHOVE n
+
+Description: it says if the power sum or LCM is larger, for 2 numbers read from the user
+
+
+Statements used (nested ones counted too):
+
+Function definition (CREATE): 1
+  CREATE compare_power_and_lcm FROM x AND y TOO GENESIS ... APOCALYPSE
+
+Conditional (CONVICTED): 1
+  CONVICTED x STATS y MOG x DIFF y GUILTY ... INNOCENT ... APOCALYPSE
+
+Return (STEAL): 2
+  STEAL "Power sum is larger"
+  STEAL "LCM is larger or equal"
+
+Declaration (RECRUIT): 2
+  RECRUIT m AS NUMBER
+  RECRUIT n AS NUMBER
+
+Input (SHOVE): 2
+  SHOVE m
+  SHOVE n
+
+Total: 8 statements, 5 statement types.
+

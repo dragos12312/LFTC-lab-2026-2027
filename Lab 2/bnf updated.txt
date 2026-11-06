@@ -1,0 +1,79 @@
+program ::= statement_list
+statement_list ::= statement statement_list | epsilon
+statement ::= decl_stmt | assign_stmt | input_stmt | output_stmt | if_stmt | while_stmt | def_stmt | return_stmt | call_stmt
+
+decl_stmt ::= "RECRUIT" identifier "AS" type
+type ::= "NUMBER" | "SQUAD"
+assign_stmt ::= variable "INHERITS" expression
+variable ::= identifier | identifier "AT" term
+input_stmt ::= "SHOVE" variable
+output_stmt ::= "GRADES" expression expression_tail
+expression_tail ::= "AND" expression expression_tail | epsilon
+return_stmt ::= "STEAL" expression
+if_stmt ::= "CONVICTED" condition "GUILTY" statement_list else_part "APOCALYPSE"
+else_part ::= "INNOCENT" statement_list | epsilon
+while_stmt ::= "GRIND" condition "NONSTOP" statement_list "APOCALYPSE"
+def_stmt ::= "CREATE" identifier "FROM" parameters_opt "TOO" "GENESIS" statement_list "APOCALYPSE"
+parameters_opt ::= parameters | epsilon
+parameters ::= identifier parameters_tail
+parameters_tail ::= "AND" identifier parameters_tail | epsilon
+call_stmt ::= function_call
+
+expression ::= term expression_rest
+expression_rest ::= operator term expression_rest | epsilon
+term ::= identifier | number | string | "FROM" expression "TOO" | function_call | squad_access | squad_literal
+function_call ::= identifier "FROM" arguments_opt "TOO"
+squad_access ::= identifier "AT" term
+squad_literal ::= "GANG" arguments_opt "SCATTER"
+arguments_opt ::= arguments | epsilon
+arguments ::= expression arguments_tail
+arguments_tail ::= "AND" expression arguments_tail | epsilon
+condition ::= expression comparison_op expression
+
+operator ::= "SIMILARITY" | "DIFF" | "STATS" | "ANNEX" | "INDEPENDENCE" | "MULTIPLY" | "SPLIT" | "BONUS"
+comparison_op ::= "SAME" | "OPPOSE" | "MOG" | "MOGGED" | "HTN" | "LTN"
+
+identifier ::= letter identifier_tail     (an identifier cannot be one of the reserved words below)
+identifier_tail ::= letter_or_digit_or_underscore identifier_tail | epsilon
+letter_or_digit_or_underscore ::= letter | digit | "_"
+number ::= "0" | nonzero_digit number_tail
+number_tail ::= digit number_tail | epsilon
+nonzero_digit ::= "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+digit ::= "0" | nonzero_digit
+string ::= '"' characters '"'
+characters ::= character characters | epsilon
+character ::= letter | digit | " " | ":" | "," | "." | "!" | "?" | "_" | "-"
+letter ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M"
+         | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
+         | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m"
+         | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z"
+
+
+Reserved words:
+RECRUIT AS NUMBER SQUAD INHERITS AT SHOVE GRADES AND STEAL CONVICTED GUILTY INNOCENT
+APOCALYPSE GRIND NONSTOP CREATE FROM TOO GENESIS GANG SCATTER SIMILARITY DIFF STATS
+ANNEX INDEPENDENCE MULTIPLY SPLIT BONUS SAME OPPOSE MOG MOGGED HTN LTN
+
+Operator meanings:
+SIMILARITY = GCD, DIFF = LCM, STATS = power sum, ANNEX = +, INDEPENDENCE = -,
+MULTIPLY = *, SPLIT = /, BONUS = %
+SAME = ==, OPPOSE = !=, MOG = >, MOGGED = <, HTN = >=, LTN = <=
+
+Order of operations (first to last):
+1. 
+FROM ... TOO (parentheses), function calls, AT
+2. 
+SIMILARITY, DIFF, STATS
+3. 
+MULTIPLY, SPLIT, BONUS
+4. 
+ANNEX, INDEPENDENCE
+5. 
+SAME, OPPOSE, MOG, MOGGED, HTN, LTN (only in conditions)
+Operators on the same level are done from left to right.
+Example: a INHERITS b ANNEX 3 MULTIPLY 5  is  a = b + (3 * 5)
+
+Rules that are not in the grammar (checked later, not by the parser):
+- STEAL can only be used inside a CREATE ... APOCALYPSE block.
+- CREATE can only be used at the top level of the program, not inside another block.
+- A variable has to be declared with RECRUIT before it is used.

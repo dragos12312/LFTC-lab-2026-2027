@@ -1,0 +1,28 @@
+Symbol table (hash table in C, size 31, 26 symbols)
+position   symbol
+(1, 0)     "Power sum:"
+(1, 1)     "Sum:"
+(4, 0)     a
+(4, 1)     "Sum times 2 minus first:"
+(5, 0)     b
+(5, 1)     "LCM:"
+(6, 0)     "is even"
+(10, 0)    g
+(11, 0)    "is odd"
+(12, 0)    i
+(13, 0)    "GCD of all numbers:"
+(17, 0)    0
+(17, 1)    report
+(17, 2)    nums
+(17, 3)    "The numbers are coprime"
+(18, 0)    1
+(19, 0)    2
+(19, 1)    "Average:"
+(21, 0)    r
+(21, 1)    total
+(22, 0)    "GCD:"
+(22, 1)    5
+(23, 0)    gcd
+(26, 0)    count
+(27, 0)    x
+(28, 0)    y

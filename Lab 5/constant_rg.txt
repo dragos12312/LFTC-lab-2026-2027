@@ -1,0 +1,9 @@
+# rg for constants (right linear)
+# epsilon is the empty word, | separates the alternatives
+nonterminals: S N C
+terminals: zero nonzero digit quote strchar
+start: S
+productions:
+S -> zero | nonzero N | nonzero | quote C
+N -> digit N | digit
+C -> strchar C | quote

@@ -1,0 +1,123 @@
+
+Medium program:
+
+CREATE gcd FROM a AND b TOO
+GENESIS
+    RECRUIT r AS NUMBER
+    GRIND b OPPOSE 0 NONSTOP
+        r INHERITS a BONUS b
+        a INHERITS b
+        b INHERITS r
+    APOCALYPSE
+    STEAL a
+APOCALYPSE
+
+CREATE report FROM x AND y TOO
+GENESIS
+    GRADES "GCD:" AND gcd FROM x AND y TOO
+    GRADES "LCM:" AND x DIFF y
+    GRADES "Power sum:" AND x STATS y
+APOCALYPSE
+
+RECRUIT nums AS SQUAD
+RECRUIT i AS NUMBER
+RECRUIT count AS NUMBER
+RECRUIT total AS NUMBER
+RECRUIT g AS NUMBER
+
+nums INHERITS GANG 0 AND 0 AND 0 AND 0 AND 0 SCATTER
+count INHERITS 5
+i INHERITS 0
+GRIND i MOGGED count NONSTOP
+    SHOVE nums AT i
+    i INHERITS i ANNEX 1
+APOCALYPSE
+
+total INHERITS 0
+g INHERITS nums AT 0
+i INHERITS 0
+GRIND i MOGGED count NONSTOP
+    total INHERITS total ANNEX nums AT i
+    g INHERITS gcd FROM g AND nums AT i TOO
+    CONVICTED nums AT i BONUS 2 SAME 0 GUILTY
+        GRADES nums AT i AND "is even"
+    INNOCENT
+        GRADES nums AT i AND "is odd"
+    APOCALYPSE
+    i INHERITS i ANNEX 1
+APOCALYPSE
+
+GRADES "Sum:" AND total
+GRADES "Average:" AND total SPLIT count
+GRADES "Sum times 2 minus first:" AND FROM total MULTIPLY 2 TOO INDEPENDENCE nums AT 0
+GRADES "GCD of all numbers:" AND g
+
+CONVICTED g SAME 1 GUILTY
+    GRADES "The numbers are coprime"
+APOCALYPSE
+
+report FROM nums AT 0 AND nums AT 1 TOO
+
+Description: it reads 5 numbers from the user into a "squad", says for each one if it is even or odd, prints their sum, average and GCD, says if they are coprime, and prints the GCD, LCM and power sum of the first two numbers
+
+
+Statements used:
+
+Declaration (RECRUIT): 6
+  RECRUIT r AS NUMBER
+  RECRUIT nums AS SQUAD
+  RECRUIT i AS NUMBER
+  RECRUIT count AS NUMBER
+  RECRUIT total AS NUMBER
+  RECRUIT g AS NUMBER
+
+Assignment (INHERITS): 13
+  r INHERITS a BONUS b
+  a INHERITS b
+  b INHERITS r
+  nums INHERITS GANG 0 AND 0 AND 0 AND 0 AND 0 SCATTER
+  count INHERITS 5
+  i INHERITS 0
+  i INHERITS i ANNEX 1  (first loop)
+  total INHERITS 0
+  g INHERITS nums AT 0
+  i INHERITS 0
+  total INHERITS total ANNEX nums AT i
+  g INHERITS gcd FROM g AND nums AT i TOO
+  i INHERITS i ANNEX 1  (second loop)
+
+Input (SHOVE): 1
+  SHOVE nums AT i
+
+Output (GRADES): 10
+  GRADES "GCD:" AND gcd FROM x AND y TOO
+  GRADES "LCM:" AND x DIFF y
+  GRADES "Power sum:" AND x STATS y
+  GRADES nums AT i AND "is even"
+  GRADES nums AT i AND "is odd"
+  GRADES "Sum:" AND total
+  GRADES "Average:" AND total SPLIT count
+  GRADES "Sum times 2 minus first:" AND FROM total MULTIPLY 2 TOO INDEPENDENCE nums AT 0
+  GRADES "GCD of all numbers:" AND g
+  GRADES "The numbers are coprime"
+
+Conditional (CONVICTED): 2
+  CONVICTED nums AT i BONUS 2 SAME 0 GUILTY ... INNOCENT ... APOCALYPSE
+  CONVICTED g SAME 1 GUILTY ... APOCALYPSE  (without INNOCENT)
+
+Loop (GRIND): 3
+  GRIND b OPPOSE 0 NONSTOP ... APOCALYPSE
+  GRIND i MOGGED count NONSTOP ... APOCALYPSE  (reading)
+  GRIND i MOGGED count NONSTOP ... APOCALYPSE  (processing)
+
+Function definition (CREATE): 2
+  CREATE gcd FROM a AND b TOO GENESIS ... APOCALYPSE
+  CREATE report FROM x AND y TOO GENESIS ... APOCALYPSE
+
+Return (STEAL): 1
+  STEAL a
+
+Expression statement (function call on its own line): 1
+  report FROM nums AT 0 AND nums AT 1 TOO
+
+Total: 39 statements, all 9 statement types.

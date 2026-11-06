@@ -1,0 +1,149 @@
+RANDLAG specification
+
+This DSL is designed as a minimal, funny language for mathematical computations,
+particularly focused on number theory operations such as greatest common divisor
+(SIMILARITY / cmmdc), least common multiple (DIFF / cmmmc), and power sums of
+integers (STATS). Its primary use case is to provide a more fun way to write math
+scripts. By combining simple input/output commands, domain-specific operators and
+control structures, it lets you write funny but readable programs without the full
+complexity of a general-purpose language.
+
+The language has two data types: NUMBER (whole numbers) and SQUAD (a list of
+numbers). A squad is written as GANG 1 AND 2 AND 3 SCATTER and its elements are
+read with AT, starting from 0.
+
+The operators are SIMILARITY (GCD), DIFF (LCM), STATS (power sum), ANNEX (+),
+INDEPENDENCE (-), MULTIPLY (*), SPLIT (/) and BONUS (%). The comparisons are SAME (==),
+OPPOSE (!=), MOG (>), MOGGED (<), HTN (>=) and LTN (<=). Expressions are evaluated
+from left to right. FROM ... TOO is used like parentheses and also for function
+calls, for example stats FROM a AND b TOO.
+
+
+Statements:
+
+RECRUIT (declaration)
+RECRUIT a AS NUMBER
+RECRUIT nums AS SQUAD
+We need this to say what type a variable has, so we know if it holds one number
+or a list of numbers.
+
+INHERITS (assignment)
+a INHERITS 12 SIMILARITY 18
+nums INHERITS GANG 4 AND 8 AND 12 SCATTER
+nums AT 0 INHERITS 5
+We need this to save results in variables and use them later, for example to
+keep a running GCD while going through a list.
+
+SHOVE (input)
+SHOVE a
+We need this so the user can type the numbers when the program runs, instead of
+writing them in the code.
+
+GRADES (output)
+GRADES "GCD:" AND a SIMILARITY b
+We need this to show the results. Several values can be printed on the same line
+by separating them with AND.
+
+CONVICTED ... GUILTY ... INNOCENT ... APOCALYPSE (conditional)
+CONVICTED n BONUS 2 SAME 0 GUILTY
+    GRADES "even"
+INNOCENT
+    GRADES "odd"
+APOCALYPSE
+We need this to make decisions, for example to check if a number is even or which
+of two values is bigger. The INNOCENT part is optional.
+
+GRIND ... NONSTOP ... APOCALYPSE (loop)
+GRIND b OPPOSE 0 NONSTOP
+    r INHERITS a BONUS b
+    a INHERITS b
+    b INHERITS r
+APOCALYPSE
+We need this to repeat steps while a condition is true. This example is Euclid's
+algorithm for the GCD. Loops are also needed to go through the elements of a squad.
+
+CREATE ... GENESIS ... APOCALYPSE (function definition)
+CREATE square FROM x TOO
+GENESIS
+    STEAL x MULTIPLY x
+APOCALYPSE
+We need this to write a computation once and use it many times with different
+values.
+
+STEAL (return)
+GRADES square FROM 7 TOO
+We need STEAL so a function can give back a result that can be printed or used in
+another expression, like in the example above.
+
+
+Sample 1:
+CREATE statistics FROM x AND y TOO
+GENESIS
+    GRADES "GCD:" AND x SIMILARITY y
+    GRADES "LCM:" AND x DIFF y
+    GRADES "Power sum:" AND x STATS y
+APOCALYPSE
+
+RECRUIT a AS NUMBER
+RECRUIT b AS NUMBER
+SHOVE a
+SHOVE b
+
+GRADES "Running stats on a and b:"
+statistics FROM a AND b TOO
+
+Sample 2:
+CREATE compare_power_and_lcm FROM x AND y TOO
+GENESIS
+    CONVICTED x STATS y MOG x DIFF y GUILTY
+        STEAL "Power sum is larger"
+    INNOCENT
+        STEAL "LCM is larger or equal"
+    APOCALYPSE
+APOCALYPSE
+
+RECRUIT m AS NUMBER
+RECRUIT n AS NUMBER
+SHOVE m
+SHOVE n
+
+GRADES compare_power_and_lcm FROM m AND n TOO
+
+Sample 3:
+RECRUIT nums AS SQUAD
+RECRUIT i AS NUMBER
+RECRUIT g AS NUMBER
+
+nums INHERITS GANG 0 AND 0 AND 0 AND 0 SCATTER
+i INHERITS 0
+GRIND i MOGGED 4 NONSTOP
+    SHOVE nums AT i
+    i INHERITS i ANNEX 1
+APOCALYPSE
+
+g INHERITS nums AT 0
+i INHERITS 1
+GRIND i MOGGED 4 NONSTOP
+    g INHERITS g SIMILARITY nums AT i
+    i INHERITS i ANNEX 1
+APOCALYPSE
+
+GRADES "GCD of all 4 numbers:" AND g
+
+Sample 4:
+RECRUIT n AS NUMBER
+RECRUIT steps AS NUMBER
+SHOVE n
+steps INHERITS 0
+
+GRIND n OPPOSE 1 NONSTOP
+    CONVICTED n BONUS 2 SAME 0 GUILTY
+        n INHERITS n SPLIT 2
+    INNOCENT
+        n INHERITS n MULTIPLY 3 ANNEX 1
+    APOCALYPSE
+    steps INHERITS steps ANNEX 1
+APOCALYPSE
+
+GRADES "Steps to reach 1:" AND steps
+
