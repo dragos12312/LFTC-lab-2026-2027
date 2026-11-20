@@ -1,0 +1,550 @@
+program is syntactically correct
+string of productions (rightmost derivation, 545 steps):
+1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 3 12 34 48 51 53 54 55 35 37 39 41 46 49 43 35 37 39 41 46 49 43 8 24 26 2 3 7 20 22 35 37 39 41 43 56 35 37 39 41 43 65 35 37 39 41 42 7 20 21 22 35 37 39 41 42 35 37 39 41 43 7 20 21 22 35 36 39 41 46 49 43 58 37 39 41 44 35 37 38 41 43 59 39 41 42 35 37 39 41 43 7 20 21 22 35 37 38 41 42 60 39 41 42 35 37 39 41 43 7 20 21 22 35 37 39 41 42 35 37 39 41 43 9 27 2 2 2 2 3 5 16 35 36 39 41 43 57 37 39 41 42 17 8 24 25 2 3 7 20 21 22 35 37 39 41 43 35 37 39 41 46 49 42 2 3 7 20 21 22 35 37 39 41 43 35 37 39 41 46 49 42 56 35 37 39 41 43 65 35 37 38 41 43 61 39 41 46 49 42 5 16 35 37 39 41 45 48 51 53 54 55 35 37 39 41 46 49 42 35 37 39 41 42 17 5 16 35 36 39 41 46 49 42 57 37 39 41 42 17 56 35 37 39 41 42 68 35 37 39 41 42 5 16 35 37 39 41 43 17 5 16 35 37 39 41 46 49 43 17 5 16 35 37 39 41 43 17 9 27 2 2 3 5 16 35 36 39 41 43 57 37 39 41 42 17 6 19 18 42 56 35 37 39 41 42 68 35 37 39 41 42 5 16 35 37 39 41 43 17 5 16 35 37 39 41 43 17 5 16 35 37 39 41 47 50 51 53 54 54 54 54 55 35 37 39 41 43 35 37 39 41 43 35 37 39 41 43 35 37 39 41 43 35 37 39 41 43 17 4 13 14 4 13 14 4 13 14 4 13 14 4 13 15 10 28 2 2 2 3 7 20 21 22 35 37 39 40 42 64 41 42 35 37 39 41 43 7 20 21 22 35 37 39 40 42 63 41 42 35 37 39 41 43 7 20 21 22 35 37 39 41 45 48 51 53 54 55 35 37 39 41 42 35 37 39 41 42 35 37 39 41 43 29 31 32 33 10 28 2 2 2 3 11 23 35 37 39 41 42 9 27 2 2 2 3 5 16 35 37 39 41 42 17 5 16 35 37 39 41 42 17 5 16 35 37 38 41 42 61 39 41 42 17 56 35 37 39 41 43 66 35 37 39 41 42 4 13 14 29 31 32 33
+
+the productions in order:
+1. (1) program -> statement_list
+2. (2) statement_list -> statement statement_list
+3. (2) statement_list -> statement statement_list
+4. (2) statement_list -> statement statement_list
+5. (2) statement_list -> statement statement_list
+6. (2) statement_list -> statement statement_list
+7. (2) statement_list -> statement statement_list
+8. (2) statement_list -> statement statement_list
+9. (2) statement_list -> statement statement_list
+10. (2) statement_list -> statement statement_list
+11. (2) statement_list -> statement statement_list
+12. (2) statement_list -> statement statement_list
+13. (2) statement_list -> statement statement_list
+14. (2) statement_list -> statement statement_list
+15. (2) statement_list -> statement statement_list
+16. (2) statement_list -> statement statement_list
+17. (2) statement_list -> statement statement_list
+18. (2) statement_list -> statement statement_list
+19. (2) statement_list -> statement statement_list
+20. (2) statement_list -> statement statement_list
+21. (2) statement_list -> statement statement_list
+22. (2) statement_list -> statement statement_list
+23. (3) statement_list -> epsilon
+24. (12) statement -> call_stmt
+25. (34) call_stmt -> function_call
+26. (48) function_call -> identifier FROM arguments_opt TOO
+27. (51) arguments_opt -> arguments
+28. (53) arguments -> expression arguments_tail
+29. (54) arguments_tail -> AND expression arguments_tail
+30. (55) arguments_tail -> epsilon
+31. (35) expression -> add_expr
+32. (37) add_expr -> mul_expr
+33. (39) mul_expr -> math_expr
+34. (41) math_expr -> term
+35. (46) term -> squad_access
+36. (49) squad_access -> identifier AT term
+37. (43) term -> constant
+38. (35) expression -> add_expr
+39. (37) add_expr -> mul_expr
+40. (39) mul_expr -> math_expr
+41. (41) math_expr -> term
+42. (46) term -> squad_access
+43. (49) squad_access -> identifier AT term
+44. (43) term -> constant
+45. (8) statement -> if_stmt
+46. (24) if_stmt -> CONVICTED condition GUILTY statement_list else_part APOCALYPSE
+47. (26) else_part -> epsilon
+48. (2) statement_list -> statement statement_list
+49. (3) statement_list -> epsilon
+50. (7) statement -> output_stmt
+51. (20) output_stmt -> GRADES expression expression_tail
+52. (22) expression_tail -> epsilon
+53. (35) expression -> add_expr
+54. (37) add_expr -> mul_expr
+55. (39) mul_expr -> math_expr
+56. (41) math_expr -> term
+57. (43) term -> constant
+58. (56) condition -> expression comparison_op expression
+59. (35) expression -> add_expr
+60. (37) add_expr -> mul_expr
+61. (39) mul_expr -> math_expr
+62. (41) math_expr -> term
+63. (43) term -> constant
+64. (65) comparison_op -> SAME
+65. (35) expression -> add_expr
+66. (37) add_expr -> mul_expr
+67. (39) mul_expr -> math_expr
+68. (41) math_expr -> term
+69. (42) term -> identifier
+70. (7) statement -> output_stmt
+71. (20) output_stmt -> GRADES expression expression_tail
+72. (21) expression_tail -> AND expression expression_tail
+73. (22) expression_tail -> epsilon
+74. (35) expression -> add_expr
+75. (37) add_expr -> mul_expr
+76. (39) mul_expr -> math_expr
+77. (41) math_expr -> term
+78. (42) term -> identifier
+79. (35) expression -> add_expr
+80. (37) add_expr -> mul_expr
+81. (39) mul_expr -> math_expr
+82. (41) math_expr -> term
+83. (43) term -> constant
+84. (7) statement -> output_stmt
+85. (20) output_stmt -> GRADES expression expression_tail
+86. (21) expression_tail -> AND expression expression_tail
+87. (22) expression_tail -> epsilon
+88. (35) expression -> add_expr
+89. (36) add_expr -> add_expr add_op mul_expr
+90. (39) mul_expr -> math_expr
+91. (41) math_expr -> term
+92. (46) term -> squad_access
+93. (49) squad_access -> identifier AT term
+94. (43) term -> constant
+95. (58) add_op -> INDEPENDENCE
+96. (37) add_expr -> mul_expr
+97. (39) mul_expr -> math_expr
+98. (41) math_expr -> term
+99. (44) term -> FROM expression TOO
+100. (35) expression -> add_expr
+101. (37) add_expr -> mul_expr
+102. (38) mul_expr -> mul_expr mul_op math_expr
+103. (41) math_expr -> term
+104. (43) term -> constant
+105. (59) mul_op -> MULTIPLY
+106. (39) mul_expr -> math_expr
+107. (41) math_expr -> term
+108. (42) term -> identifier
+109. (35) expression -> add_expr
+110. (37) add_expr -> mul_expr
+111. (39) mul_expr -> math_expr
+112. (41) math_expr -> term
+113. (43) term -> constant
+114. (7) statement -> output_stmt
+115. (20) output_stmt -> GRADES expression expression_tail
+116. (21) expression_tail -> AND expression expression_tail
+117. (22) expression_tail -> epsilon
+118. (35) expression -> add_expr
+119. (37) add_expr -> mul_expr
+120. (38) mul_expr -> mul_expr mul_op math_expr
+121. (41) math_expr -> term
+122. (42) term -> identifier
+123. (60) mul_op -> SPLIT
+124. (39) mul_expr -> math_expr
+125. (41) math_expr -> term
+126. (42) term -> identifier
+127. (35) expression -> add_expr
+128. (37) add_expr -> mul_expr
+129. (39) mul_expr -> math_expr
+130. (41) math_expr -> term
+131. (43) term -> constant
+132. (7) statement -> output_stmt
+133. (20) output_stmt -> GRADES expression expression_tail
+134. (21) expression_tail -> AND expression expression_tail
+135. (22) expression_tail -> epsilon
+136. (35) expression -> add_expr
+137. (37) add_expr -> mul_expr
+138. (39) mul_expr -> math_expr
+139. (41) math_expr -> term
+140. (42) term -> identifier
+141. (35) expression -> add_expr
+142. (37) add_expr -> mul_expr
+143. (39) mul_expr -> math_expr
+144. (41) math_expr -> term
+145. (43) term -> constant
+146. (9) statement -> while_stmt
+147. (27) while_stmt -> GRIND condition NONSTOP statement_list APOCALYPSE
+148. (2) statement_list -> statement statement_list
+149. (2) statement_list -> statement statement_list
+150. (2) statement_list -> statement statement_list
+151. (2) statement_list -> statement statement_list
+152. (3) statement_list -> epsilon
+153. (5) statement -> assign_stmt
+154. (16) assign_stmt -> variable INHERITS expression
+155. (35) expression -> add_expr
+156. (36) add_expr -> add_expr add_op mul_expr
+157. (39) mul_expr -> math_expr
+158. (41) math_expr -> term
+159. (43) term -> constant
+160. (57) add_op -> ANNEX
+161. (37) add_expr -> mul_expr
+162. (39) mul_expr -> math_expr
+163. (41) math_expr -> term
+164. (42) term -> identifier
+165. (17) variable -> identifier
+166. (8) statement -> if_stmt
+167. (24) if_stmt -> CONVICTED condition GUILTY statement_list else_part APOCALYPSE
+168. (25) else_part -> INNOCENT statement_list
+169. (2) statement_list -> statement statement_list
+170. (3) statement_list -> epsilon
+171. (7) statement -> output_stmt
+172. (20) output_stmt -> GRADES expression expression_tail
+173. (21) expression_tail -> AND expression expression_tail
+174. (22) expression_tail -> epsilon
+175. (35) expression -> add_expr
+176. (37) add_expr -> mul_expr
+177. (39) mul_expr -> math_expr
+178. (41) math_expr -> term
+179. (43) term -> constant
+180. (35) expression -> add_expr
+181. (37) add_expr -> mul_expr
+182. (39) mul_expr -> math_expr
+183. (41) math_expr -> term
+184. (46) term -> squad_access
+185. (49) squad_access -> identifier AT term
+186. (42) term -> identifier
+187. (2) statement_list -> statement statement_list
+188. (3) statement_list -> epsilon
+189. (7) statement -> output_stmt
+190. (20) output_stmt -> GRADES expression expression_tail
+191. (21) expression_tail -> AND expression expression_tail
+192. (22) expression_tail -> epsilon
+193. (35) expression -> add_expr
+194. (37) add_expr -> mul_expr
+195. (39) mul_expr -> math_expr
+196. (41) math_expr -> term
+197. (43) term -> constant
+198. (35) expression -> add_expr
+199. (37) add_expr -> mul_expr
+200. (39) mul_expr -> math_expr
+201. (41) math_expr -> term
+202. (46) term -> squad_access
+203. (49) squad_access -> identifier AT term
+204. (42) term -> identifier
+205. (56) condition -> expression comparison_op expression
+206. (35) expression -> add_expr
+207. (37) add_expr -> mul_expr
+208. (39) mul_expr -> math_expr
+209. (41) math_expr -> term
+210. (43) term -> constant
+211. (65) comparison_op -> SAME
+212. (35) expression -> add_expr
+213. (37) add_expr -> mul_expr
+214. (38) mul_expr -> mul_expr mul_op math_expr
+215. (41) math_expr -> term
+216. (43) term -> constant
+217. (61) mul_op -> BONUS
+218. (39) mul_expr -> math_expr
+219. (41) math_expr -> term
+220. (46) term -> squad_access
+221. (49) squad_access -> identifier AT term
+222. (42) term -> identifier
+223. (5) statement -> assign_stmt
+224. (16) assign_stmt -> variable INHERITS expression
+225. (35) expression -> add_expr
+226. (37) add_expr -> mul_expr
+227. (39) mul_expr -> math_expr
+228. (41) math_expr -> term
+229. (45) term -> function_call
+230. (48) function_call -> identifier FROM arguments_opt TOO
+231. (51) arguments_opt -> arguments
+232. (53) arguments -> expression arguments_tail
+233. (54) arguments_tail -> AND expression arguments_tail
+234. (55) arguments_tail -> epsilon
+235. (35) expression -> add_expr
+236. (37) add_expr -> mul_expr
+237. (39) mul_expr -> math_expr
+238. (41) math_expr -> term
+239. (46) term -> squad_access
+240. (49) squad_access -> identifier AT term
+241. (42) term -> identifier
+242. (35) expression -> add_expr
+243. (37) add_expr -> mul_expr
+244. (39) mul_expr -> math_expr
+245. (41) math_expr -> term
+246. (42) term -> identifier
+247. (17) variable -> identifier
+248. (5) statement -> assign_stmt
+249. (16) assign_stmt -> variable INHERITS expression
+250. (35) expression -> add_expr
+251. (36) add_expr -> add_expr add_op mul_expr
+252. (39) mul_expr -> math_expr
+253. (41) math_expr -> term
+254. (46) term -> squad_access
+255. (49) squad_access -> identifier AT term
+256. (42) term -> identifier
+257. (57) add_op -> ANNEX
+258. (37) add_expr -> mul_expr
+259. (39) mul_expr -> math_expr
+260. (41) math_expr -> term
+261. (42) term -> identifier
+262. (17) variable -> identifier
+263. (56) condition -> expression comparison_op expression
+264. (35) expression -> add_expr
+265. (37) add_expr -> mul_expr
+266. (39) mul_expr -> math_expr
+267. (41) math_expr -> term
+268. (42) term -> identifier
+269. (68) comparison_op -> MOGGED
+270. (35) expression -> add_expr
+271. (37) add_expr -> mul_expr
+272. (39) mul_expr -> math_expr
+273. (41) math_expr -> term
+274. (42) term -> identifier
+275. (5) statement -> assign_stmt
+276. (16) assign_stmt -> variable INHERITS expression
+277. (35) expression -> add_expr
+278. (37) add_expr -> mul_expr
+279. (39) mul_expr -> math_expr
+280. (41) math_expr -> term
+281. (43) term -> constant
+282. (17) variable -> identifier
+283. (5) statement -> assign_stmt
+284. (16) assign_stmt -> variable INHERITS expression
+285. (35) expression -> add_expr
+286. (37) add_expr -> mul_expr
+287. (39) mul_expr -> math_expr
+288. (41) math_expr -> term
+289. (46) term -> squad_access
+290. (49) squad_access -> identifier AT term
+291. (43) term -> constant
+292. (17) variable -> identifier
+293. (5) statement -> assign_stmt
+294. (16) assign_stmt -> variable INHERITS expression
+295. (35) expression -> add_expr
+296. (37) add_expr -> mul_expr
+297. (39) mul_expr -> math_expr
+298. (41) math_expr -> term
+299. (43) term -> constant
+300. (17) variable -> identifier
+301. (9) statement -> while_stmt
+302. (27) while_stmt -> GRIND condition NONSTOP statement_list APOCALYPSE
+303. (2) statement_list -> statement statement_list
+304. (2) statement_list -> statement statement_list
+305. (3) statement_list -> epsilon
+306. (5) statement -> assign_stmt
+307. (16) assign_stmt -> variable INHERITS expression
+308. (35) expression -> add_expr
+309. (36) add_expr -> add_expr add_op mul_expr
+310. (39) mul_expr -> math_expr
+311. (41) math_expr -> term
+312. (43) term -> constant
+313. (57) add_op -> ANNEX
+314. (37) add_expr -> mul_expr
+315. (39) mul_expr -> math_expr
+316. (41) math_expr -> term
+317. (42) term -> identifier
+318. (17) variable -> identifier
+319. (6) statement -> input_stmt
+320. (19) input_stmt -> SHOVE variable
+321. (18) variable -> identifier AT term
+322. (42) term -> identifier
+323. (56) condition -> expression comparison_op expression
+324. (35) expression -> add_expr
+325. (37) add_expr -> mul_expr
+326. (39) mul_expr -> math_expr
+327. (41) math_expr -> term
+328. (42) term -> identifier
+329. (68) comparison_op -> MOGGED
+330. (35) expression -> add_expr
+331. (37) add_expr -> mul_expr
+332. (39) mul_expr -> math_expr
+333. (41) math_expr -> term
+334. (42) term -> identifier
+335. (5) statement -> assign_stmt
+336. (16) assign_stmt -> variable INHERITS expression
+337. (35) expression -> add_expr
+338. (37) add_expr -> mul_expr
+339. (39) mul_expr -> math_expr
+340. (41) math_expr -> term
+341. (43) term -> constant
+342. (17) variable -> identifier
+343. (5) statement -> assign_stmt
+344. (16) assign_stmt -> variable INHERITS expression
+345. (35) expression -> add_expr
+346. (37) add_expr -> mul_expr
+347. (39) mul_expr -> math_expr
+348. (41) math_expr -> term
+349. (43) term -> constant
+350. (17) variable -> identifier
+351. (5) statement -> assign_stmt
+352. (16) assign_stmt -> variable INHERITS expression
+353. (35) expression -> add_expr
+354. (37) add_expr -> mul_expr
+355. (39) mul_expr -> math_expr
+356. (41) math_expr -> term
+357. (47) term -> squad_literal
+358. (50) squad_literal -> GANG arguments_opt SCATTER
+359. (51) arguments_opt -> arguments
+360. (53) arguments -> expression arguments_tail
+361. (54) arguments_tail -> AND expression arguments_tail
+362. (54) arguments_tail -> AND expression arguments_tail
+363. (54) arguments_tail -> AND expression arguments_tail
+364. (54) arguments_tail -> AND expression arguments_tail
+365. (55) arguments_tail -> epsilon
+366. (35) expression -> add_expr
+367. (37) add_expr -> mul_expr
+368. (39) mul_expr -> math_expr
+369. (41) math_expr -> term
+370. (43) term -> constant
+371. (35) expression -> add_expr
+372. (37) add_expr -> mul_expr
+373. (39) mul_expr -> math_expr
+374. (41) math_expr -> term
+375. (43) term -> constant
+376. (35) expression -> add_expr
+377. (37) add_expr -> mul_expr
+378. (39) mul_expr -> math_expr
+379. (41) math_expr -> term
+380. (43) term -> constant
+381. (35) expression -> add_expr
+382. (37) add_expr -> mul_expr
+383. (39) mul_expr -> math_expr
+384. (41) math_expr -> term
+385. (43) term -> constant
+386. (35) expression -> add_expr
+387. (37) add_expr -> mul_expr
+388. (39) mul_expr -> math_expr
+389. (41) math_expr -> term
+390. (43) term -> constant
+391. (17) variable -> identifier
+392. (4) statement -> decl_stmt
+393. (13) decl_stmt -> RECRUIT identifier AS type
+394. (14) type -> NUMBER
+395. (4) statement -> decl_stmt
+396. (13) decl_stmt -> RECRUIT identifier AS type
+397. (14) type -> NUMBER
+398. (4) statement -> decl_stmt
+399. (13) decl_stmt -> RECRUIT identifier AS type
+400. (14) type -> NUMBER
+401. (4) statement -> decl_stmt
+402. (13) decl_stmt -> RECRUIT identifier AS type
+403. (14) type -> NUMBER
+404. (4) statement -> decl_stmt
+405. (13) decl_stmt -> RECRUIT identifier AS type
+406. (15) type -> SQUAD
+407. (10) statement -> def_stmt
+408. (28) def_stmt -> CREATE identifier FROM parameters_opt TOO GENESIS statement_list APOCALYPSE
+409. (2) statement_list -> statement statement_list
+410. (2) statement_list -> statement statement_list
+411. (2) statement_list -> statement statement_list
+412. (3) statement_list -> epsilon
+413. (7) statement -> output_stmt
+414. (20) output_stmt -> GRADES expression expression_tail
+415. (21) expression_tail -> AND expression expression_tail
+416. (22) expression_tail -> epsilon
+417. (35) expression -> add_expr
+418. (37) add_expr -> mul_expr
+419. (39) mul_expr -> math_expr
+420. (40) math_expr -> math_expr math_op term
+421. (42) term -> identifier
+422. (64) math_op -> STATS
+423. (41) math_expr -> term
+424. (42) term -> identifier
+425. (35) expression -> add_expr
+426. (37) add_expr -> mul_expr
+427. (39) mul_expr -> math_expr
+428. (41) math_expr -> term
+429. (43) term -> constant
+430. (7) statement -> output_stmt
+431. (20) output_stmt -> GRADES expression expression_tail
+432. (21) expression_tail -> AND expression expression_tail
+433. (22) expression_tail -> epsilon
+434. (35) expression -> add_expr
+435. (37) add_expr -> mul_expr
+436. (39) mul_expr -> math_expr
+437. (40) math_expr -> math_expr math_op term
+438. (42) term -> identifier
+439. (63) math_op -> DIFF
+440. (41) math_expr -> term
+441. (42) term -> identifier
+442. (35) expression -> add_expr
+443. (37) add_expr -> mul_expr
+444. (39) mul_expr -> math_expr
+445. (41) math_expr -> term
+446. (43) term -> constant
+447. (7) statement -> output_stmt
+448. (20) output_stmt -> GRADES expression expression_tail
+449. (21) expression_tail -> AND expression expression_tail
+450. (22) expression_tail -> epsilon
+451. (35) expression -> add_expr
+452. (37) add_expr -> mul_expr
+453. (39) mul_expr -> math_expr
+454. (41) math_expr -> term
+455. (45) term -> function_call
+456. (48) function_call -> identifier FROM arguments_opt TOO
+457. (51) arguments_opt -> arguments
+458. (53) arguments -> expression arguments_tail
+459. (54) arguments_tail -> AND expression arguments_tail
+460. (55) arguments_tail -> epsilon
+461. (35) expression -> add_expr
+462. (37) add_expr -> mul_expr
+463. (39) mul_expr -> math_expr
+464. (41) math_expr -> term
+465. (42) term -> identifier
+466. (35) expression -> add_expr
+467. (37) add_expr -> mul_expr
+468. (39) mul_expr -> math_expr
+469. (41) math_expr -> term
+470. (42) term -> identifier
+471. (35) expression -> add_expr
+472. (37) add_expr -> mul_expr
+473. (39) mul_expr -> math_expr
+474. (41) math_expr -> term
+475. (43) term -> constant
+476. (29) parameters_opt -> parameters
+477. (31) parameters -> identifier parameters_tail
+478. (32) parameters_tail -> AND identifier parameters_tail
+479. (33) parameters_tail -> epsilon
+480. (10) statement -> def_stmt
+481. (28) def_stmt -> CREATE identifier FROM parameters_opt TOO GENESIS statement_list APOCALYPSE
+482. (2) statement_list -> statement statement_list
+483. (2) statement_list -> statement statement_list
+484. (2) statement_list -> statement statement_list
+485. (3) statement_list -> epsilon
+486. (11) statement -> return_stmt
+487. (23) return_stmt -> STEAL expression
+488. (35) expression -> add_expr
+489. (37) add_expr -> mul_expr
+490. (39) mul_expr -> math_expr
+491. (41) math_expr -> term
+492. (42) term -> identifier
+493. (9) statement -> while_stmt
+494. (27) while_stmt -> GRIND condition NONSTOP statement_list APOCALYPSE
+495. (2) statement_list -> statement statement_list
+496. (2) statement_list -> statement statement_list
+497. (2) statement_list -> statement statement_list
+498. (3) statement_list -> epsilon
+499. (5) statement -> assign_stmt
+500. (16) assign_stmt -> variable INHERITS expression
+501. (35) expression -> add_expr
+502. (37) add_expr -> mul_expr
+503. (39) mul_expr -> math_expr
+504. (41) math_expr -> term
+505. (42) term -> identifier
+506. (17) variable -> identifier
+507. (5) statement -> assign_stmt
+508. (16) assign_stmt -> variable INHERITS expression
+509. (35) expression -> add_expr
+510. (37) add_expr -> mul_expr
+511. (39) mul_expr -> math_expr
+512. (41) math_expr -> term
+513. (42) term -> identifier
+514. (17) variable -> identifier
+515. (5) statement -> assign_stmt
+516. (16) assign_stmt -> variable INHERITS expression
+517. (35) expression -> add_expr
+518. (37) add_expr -> mul_expr
+519. (38) mul_expr -> mul_expr mul_op math_expr
+520. (41) math_expr -> term
+521. (42) term -> identifier
+522. (61) mul_op -> BONUS
+523. (39) mul_expr -> math_expr
+524. (41) math_expr -> term
+525. (42) term -> identifier
+526. (17) variable -> identifier
+527. (56) condition -> expression comparison_op expression
+528. (35) expression -> add_expr
+529. (37) add_expr -> mul_expr
+530. (39) mul_expr -> math_expr
+531. (41) math_expr -> term
+532. (43) term -> constant
+533. (66) comparison_op -> OPPOSE
+534. (35) expression -> add_expr
+535. (37) add_expr -> mul_expr
+536. (39) mul_expr -> math_expr
+537. (41) math_expr -> term
+538. (42) term -> identifier
+539. (4) statement -> decl_stmt
+540. (13) decl_stmt -> RECRUIT identifier AS type
+541. (14) type -> NUMBER
+542. (29) parameters_opt -> parameters
+543. (31) parameters -> identifier parameters_tail
+544. (32) parameters_tail -> AND identifier parameters_tail
+545. (33) parameters_tail -> epsilon

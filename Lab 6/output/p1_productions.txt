@@ -1,0 +1,71 @@
+program is syntactically correct
+string of productions (rightmost derivation, 66 steps):
+1 2 2 2 2 2 3 6 19 17 6 19 17 4 13 14 4 13 14 10 28 2 3 8 24 25 2 3 11 23 35 37 39 41 43 2 3 11 23 35 37 39 41 43 56 35 37 39 40 42 63 41 42 67 35 37 39 40 42 64 41 42 29 31 32 33
+
+the productions in order:
+1. (1) program -> statement_list
+2. (2) statement_list -> statement statement_list
+3. (2) statement_list -> statement statement_list
+4. (2) statement_list -> statement statement_list
+5. (2) statement_list -> statement statement_list
+6. (2) statement_list -> statement statement_list
+7. (3) statement_list -> epsilon
+8. (6) statement -> input_stmt
+9. (19) input_stmt -> SHOVE variable
+10. (17) variable -> identifier
+11. (6) statement -> input_stmt
+12. (19) input_stmt -> SHOVE variable
+13. (17) variable -> identifier
+14. (4) statement -> decl_stmt
+15. (13) decl_stmt -> RECRUIT identifier AS type
+16. (14) type -> NUMBER
+17. (4) statement -> decl_stmt
+18. (13) decl_stmt -> RECRUIT identifier AS type
+19. (14) type -> NUMBER
+20. (10) statement -> def_stmt
+21. (28) def_stmt -> CREATE identifier FROM parameters_opt TOO GENESIS statement_list APOCALYPSE
+22. (2) statement_list -> statement statement_list
+23. (3) statement_list -> epsilon
+24. (8) statement -> if_stmt
+25. (24) if_stmt -> CONVICTED condition GUILTY statement_list else_part APOCALYPSE
+26. (25) else_part -> INNOCENT statement_list
+27. (2) statement_list -> statement statement_list
+28. (3) statement_list -> epsilon
+29. (11) statement -> return_stmt
+30. (23) return_stmt -> STEAL expression
+31. (35) expression -> add_expr
+32. (37) add_expr -> mul_expr
+33. (39) mul_expr -> math_expr
+34. (41) math_expr -> term
+35. (43) term -> constant
+36. (2) statement_list -> statement statement_list
+37. (3) statement_list -> epsilon
+38. (11) statement -> return_stmt
+39. (23) return_stmt -> STEAL expression
+40. (35) expression -> add_expr
+41. (37) add_expr -> mul_expr
+42. (39) mul_expr -> math_expr
+43. (41) math_expr -> term
+44. (43) term -> constant
+45. (56) condition -> expression comparison_op expression
+46. (35) expression -> add_expr
+47. (37) add_expr -> mul_expr
+48. (39) mul_expr -> math_expr
+49. (40) math_expr -> math_expr math_op term
+50. (42) term -> identifier
+51. (63) math_op -> DIFF
+52. (41) math_expr -> term
+53. (42) term -> identifier
+54. (67) comparison_op -> MOG
+55. (35) expression -> add_expr
+56. (37) add_expr -> mul_expr
+57. (39) mul_expr -> math_expr
+58. (40) math_expr -> math_expr math_op term
+59. (42) term -> identifier
+60. (64) math_op -> STATS
+61. (41) math_expr -> term
+62. (42) term -> identifier
+63. (29) parameters_opt -> parameters
+64. (31) parameters -> identifier parameters_tail
+65. (32) parameters_tail -> AND identifier parameters_tail
+66. (33) parameters_tail -> epsilon

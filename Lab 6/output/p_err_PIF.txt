@@ -1,0 +1,29 @@
+Program Internal Form
+token           code  ST position
+RECRUIT         2     -1
+id              0     (4, 0)
+AS              3     -1
+NUMBER          4     -1
+RECRUIT         2     -1
+AS              3     -1
+NUMBER          4     -1
+RECRUIT         2     -1
+id              0     (7, 0)
+AS              3     -1
+NUMBER          4     -1
+id              0     (4, 0)
+INHERITS        6     -1
+id              0     (7, 0)
+INHERITS        6     -1
+id              0     (4, 0)
+ANNEX           27    -1
+const           1     (22, 0)
+const           1     (20, 0)
+GRADES          9     -1
+GRADES          9     -1
+INHERITS        6     -1
+const           1     (4, 1)
+GRADES          9     -1
+id              0     (4, 0)
+AND             10    -1
+id              0     (7, 0)

@@ -1,0 +1,6 @@
+Lexical error at line 2, column 9: 2b (identifier cannot start with a digit)
+Lexical error at line 4, column 12: 007 (number cannot start with 0)
+Lexical error at line 5, column 23: @ (invalid character(s))
+Lexical error at line 6, column 8: "hello; world" (invalid character in string)
+Lexical error at line 7, column 8: "missing quote (string is not closed)
+Lexical error at line 8, column 1: $x (invalid character(s))

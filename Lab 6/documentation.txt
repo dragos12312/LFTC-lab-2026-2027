@@ -1,0 +1,137 @@
+Lab 6 - Parsing the Mini Language with Yacc
+
+1. What the lab does
+
+The program is first scanned by the scanner from Lab 5 (which uses the FA for identifiers and constants). This produces the PIF and the ST.
+Then the PIF is given to yacc token by token, and yacc checks whether the program follows the grammar.
+If it does, the output is the string of productions that were used, which shows how the program is derived from the start symbol.
+For yacc I used PLY (Python Lex-Yacc). It works the same way as yacc/bison, but it is written in Python, so I do not need flex and bison on Windows.
+PLY builds an LALR(1) parser from the grammar, just like yacc does.
+
+
+2. The grammar
+
+The grammar is G = (N, Sigma, P, S).
+
+N (nonterminals):
+program, statement_list, statement, decl_stmt, type, assign_stmt, variable, input_stmt, output_stmt, expression_tail, return_stmt, if_stmt, else_part, while_stmt, def_stmt, parameters_opt, parameters, parameters_tail, call_stmt, expression, add_expr, mul_expr, math_expr, term, function_call, squad_access, squad_literal, arguments_opt, arguments, arguments_tail, condition, add_op, mul_op, math_op, comparison_op
+
+Sigma (terminals): the reserved words and the two tokens that come from the PIF.
+RECRUIT, AS, NUMBER, SQUAD, INHERITS, AT, SHOVE, GRADES, AND, STEAL, CONVICTED, GUILTY, INNOCENT, APOCALYPSE, GRIND, NONSTOP, CREATE, FROM, TOO, GENESIS, GANG, SCATTER, SIMILARITY, DIFF, STATS, ANNEX, INDEPENDENCE, MULTIPLY, SPLIT, BONUS, SAME, OPPOSE, MOG, MOGGED, HTN, LTN, identifier, constant
+
+S (start symbol): program
+
+Identifier and constant are terminals here because the scanner has already checked them with the FA from Lab 4, so in the PIF they only appear as id (code 0) and const (code 1).
+This is also why the rules for letter, digit, number and string from Lab 2 are not part of this grammar: they belong to the lexical level, which is handled by the scanner.
+
+P (productions): the productions are numbered, and these numbers are what the parser prints.
+1. program -> statement_list
+2. statement_list -> statement statement_list
+3. statement_list -> epsilon
+4. statement -> decl_stmt
+5. statement -> assign_stmt
+6. statement -> input_stmt
+7. statement -> output_stmt
+8. statement -> if_stmt
+9. statement -> while_stmt
+10. statement -> def_stmt
+11. statement -> return_stmt
+12. statement -> call_stmt
+13. decl_stmt -> RECRUIT identifier AS type
+14. type -> NUMBER
+15. type -> SQUAD
+16. assign_stmt -> variable INHERITS expression
+17. variable -> identifier
+18. variable -> identifier AT term
+19. input_stmt -> SHOVE variable
+20. output_stmt -> GRADES expression expression_tail
+21. expression_tail -> AND expression expression_tail
+22. expression_tail -> epsilon
+23. return_stmt -> STEAL expression
+24. if_stmt -> CONVICTED condition GUILTY statement_list else_part APOCALYPSE
+25. else_part -> INNOCENT statement_list
+26. else_part -> epsilon
+27. while_stmt -> GRIND condition NONSTOP statement_list APOCALYPSE
+28. def_stmt -> CREATE identifier FROM parameters_opt TOO GENESIS statement_list APOCALYPSE
+29. parameters_opt -> parameters
+30. parameters_opt -> epsilon
+31. parameters -> identifier parameters_tail
+32. parameters_tail -> AND identifier parameters_tail
+33. parameters_tail -> epsilon
+34. call_stmt -> function_call
+35. expression -> add_expr
+36. add_expr -> add_expr add_op mul_expr
+37. add_expr -> mul_expr
+38. mul_expr -> mul_expr mul_op math_expr
+39. mul_expr -> math_expr
+40. math_expr -> math_expr math_op term
+41. math_expr -> term
+42. term -> identifier
+43. term -> constant
+44. term -> FROM expression TOO
+45. term -> function_call
+46. term -> squad_access
+47. term -> squad_literal
+48. function_call -> identifier FROM arguments_opt TOO
+49. squad_access -> identifier AT term
+50. squad_literal -> GANG arguments_opt SCATTER
+51. arguments_opt -> arguments
+52. arguments_opt -> epsilon
+53. arguments -> expression arguments_tail
+54. arguments_tail -> AND expression arguments_tail
+55. arguments_tail -> epsilon
+56. condition -> expression comparison_op expression
+57. add_op -> ANNEX
+58. add_op -> INDEPENDENCE
+59. mul_op -> MULTIPLY
+60. mul_op -> SPLIT
+61. mul_op -> BONUS
+62. math_op -> SIMILARITY
+63. math_op -> DIFF
+64. math_op -> STATS
+65. comparison_op -> SAME
+66. comparison_op -> OPPOSE
+67. comparison_op -> MOG
+68. comparison_op -> MOGGED
+69. comparison_op -> HTN
+70. comparison_op -> LTN
+
+The same productions are in grammar.txt. The parser reads them from that file, so grammar.txt is the input grammar.
+
+
+3. What I changed from the Lab 2 grammar
+
+The statements are the same as in Lab 2.
+The expressions were previously written as add_expr ::= mul_expr add_rest and add_rest ::= add_op mul_expr add_rest | epsilon. That form works well for a top-down parser, but yacc is a bottom-up parser and works better with left recursion, so the rule is now add_expr -> add_expr add_op mul_expr | mul_expr (and the same for mul_expr and math_expr).
+The new rules describe the same language, and with left recursion the operators on the same level are evaluated from left to right, as specified in Lab 2.
+The order of operations stays the same: math_op (SIMILARITY, DIFF, STATS) first, then mul_op (MULTIPLY, SPLIT, BONUS), then add_op (ANNEX, INDEPENDENCE), and comparisons are only allowed in conditions.
+String and number were replaced by constant, and the character-level rules were moved to the scanner.
+
+The grammar has no conflicts in PLY (no shift/reduce or reduce/reduce conflicts), so it is LALR(1).
+
+
+4. How scanning and parsing work together
+
+The file parser.py calls scan() from scanner.py, which writes the PIF, ST and errors files, as in Lab 5.
+If there are lexical errors, the program stops there, because there is no point in parsing a program with invalid tokens.
+Otherwise, PifLexer goes through the PIF and gives yacc one token at a time (this is normally the job of lex):
+The token id becomes identifier, const becomes constant, and a reserved word stays the word itself.
+The value of an identifier or constant is taken from the ST using the position stored in the PIF, and it is used in the error messages.
+
+Each production in grammar.txt becomes a rule for yacc. Whenever yacc reduces using a production, its number is saved.
+Yacc works bottom-up, so the sequence of reductions is a rightmost derivation in reverse order. Reversing the list gives the rightmost derivation from program down to the program text, which is the string of productions.
+
+If the program has a syntax error, the parser reports the line and the token where it stopped.
+
+
+5. Example
+
+For p1.txt, the string of productions starts like this:
+1 2 2 2 2 2 3 6 19 17 ...
+Production 1 is program -> statement_list, then production 2 appears five times because there are five statements, and production 3 is the epsilon at the end. After that, the last statement is expanded first (since the derivation is rightmost): SHOVE n uses 6 (statement -> input_stmt), 19 (input_stmt -> SHOVE variable), 17 (variable -> identifier), and so on.
+The full output is in output/p1_productions.txt, where each step is also written out next to its production.
+
+p_syntax_err.txt has a missing operand (y INHERITS x ANNEX), and the parser outputs:
+syntax error at line 6: unexpected GRADES (GRADES)
+
+6. Github repo: https://github.com/dragos12312/LFTC-lab-2026-2027

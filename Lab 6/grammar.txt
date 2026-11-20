@@ -1,0 +1,76 @@
+# grammar for the mini language, lab 6
+# one production per line, the parser reads this file and numbers them from 1 in this order
+# words in caps are reserved words, identifier and constant are the tokens from the PIF
+# everything else is a nonterminal, epsilon means the empty string
+# the start symbol is program (first line)
+
+program -> statement_list
+statement_list -> statement statement_list
+statement_list -> epsilon
+statement -> decl_stmt
+statement -> assign_stmt
+statement -> input_stmt
+statement -> output_stmt
+statement -> if_stmt
+statement -> while_stmt
+statement -> def_stmt
+statement -> return_stmt
+statement -> call_stmt
+decl_stmt -> RECRUIT identifier AS type
+type -> NUMBER
+type -> SQUAD
+assign_stmt -> variable INHERITS expression
+variable -> identifier
+variable -> identifier AT term
+input_stmt -> SHOVE variable
+output_stmt -> GRADES expression expression_tail
+expression_tail -> AND expression expression_tail
+expression_tail -> epsilon
+return_stmt -> STEAL expression
+if_stmt -> CONVICTED condition GUILTY statement_list else_part APOCALYPSE
+else_part -> INNOCENT statement_list
+else_part -> epsilon
+while_stmt -> GRIND condition NONSTOP statement_list APOCALYPSE
+def_stmt -> CREATE identifier FROM parameters_opt TOO GENESIS statement_list APOCALYPSE
+parameters_opt -> parameters
+parameters_opt -> epsilon
+parameters -> identifier parameters_tail
+parameters_tail -> AND identifier parameters_tail
+parameters_tail -> epsilon
+call_stmt -> function_call
+expression -> add_expr
+add_expr -> add_expr add_op mul_expr
+add_expr -> mul_expr
+mul_expr -> mul_expr mul_op math_expr
+mul_expr -> math_expr
+math_expr -> math_expr math_op term
+math_expr -> term
+term -> identifier
+term -> constant
+term -> FROM expression TOO
+term -> function_call
+term -> squad_access
+term -> squad_literal
+function_call -> identifier FROM arguments_opt TOO
+squad_access -> identifier AT term
+squad_literal -> GANG arguments_opt SCATTER
+arguments_opt -> arguments
+arguments_opt -> epsilon
+arguments -> expression arguments_tail
+arguments_tail -> AND expression arguments_tail
+arguments_tail -> epsilon
+condition -> expression comparison_op expression
+add_op -> ANNEX
+add_op -> INDEPENDENCE
+mul_op -> MULTIPLY
+mul_op -> SPLIT
+mul_op -> BONUS
+math_op -> SIMILARITY
+math_op -> DIFF
+math_op -> STATS
+comparison_op -> SAME
+comparison_op -> OPPOSE
+comparison_op -> MOG
+comparison_op -> MOGGED
+comparison_op -> HTN
+comparison_op -> LTN

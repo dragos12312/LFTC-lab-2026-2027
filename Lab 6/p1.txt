@@ -1,0 +1,13 @@
+CREATE compare_power_and_lcm FROM x AND y TOO
+GENESIS
+    CONVICTED x STATS y MOG x DIFF y GUILTY
+        STEAL "Power sum is larger"
+    INNOCENT
+        STEAL "LCM is larger or equal"
+    APOCALYPSE
+APOCALYPSE
+
+RECRUIT m AS NUMBER
+RECRUIT n AS NUMBER
+SHOVE m
+SHOVE n

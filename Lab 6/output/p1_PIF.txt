@@ -1,0 +1,38 @@
+Program Internal Form
+token           code  ST position
+CREATE          18    -1
+id              0     (7, 0)
+FROM            19    -1
+id              0     (27, 0)
+AND             10    -1
+id              0     (28, 0)
+TOO             20    -1
+GENESIS         21    -1
+CONVICTED       12    -1
+id              0     (27, 0)
+STATS           26    -1
+id              0     (28, 0)
+MOG             34    -1
+id              0     (27, 0)
+DIFF            25    -1
+id              0     (28, 0)
+GUILTY          13    -1
+STEAL           11    -1
+const           1     (27, 1)
+INNOCENT        14    -1
+STEAL           11    -1
+const           1     (19, 0)
+APOCALYPSE      15    -1
+APOCALYPSE      15    -1
+RECRUIT         2     -1
+id              0     (16, 0)
+AS              3     -1
+NUMBER          4     -1
+RECRUIT         2     -1
+id              0     (17, 0)
+AS              3     -1
+NUMBER          4     -1
+SHOVE           8     -1
+id              0     (16, 0)
+SHOVE           8     -1
+id              0     (17, 0)

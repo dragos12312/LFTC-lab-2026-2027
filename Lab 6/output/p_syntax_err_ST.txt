@@ -1,0 +1,6 @@
+Symbol table (hash table in C, size 31, 4 symbols)
+position   symbol
+(20, 0)    3
+(22, 0)    5
+(27, 0)    x
+(28, 0)    y

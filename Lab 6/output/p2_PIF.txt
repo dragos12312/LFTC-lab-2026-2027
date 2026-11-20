@@ -1,0 +1,224 @@
+Program Internal Form
+token           code  ST position
+CREATE          18    -1
+id              0     (23, 0)
+FROM            19    -1
+id              0     (4, 0)
+AND             10    -1
+id              0     (5, 0)
+TOO             20    -1
+GENESIS         21    -1
+RECRUIT         2     -1
+id              0     (21, 0)
+AS              3     -1
+NUMBER          4     -1
+GRIND           16    -1
+id              0     (5, 0)
+OPPOSE          33    -1
+const           1     (17, 0)
+NONSTOP         17    -1
+id              0     (21, 0)
+INHERITS        6     -1
+id              0     (4, 0)
+BONUS           31    -1
+id              0     (5, 0)
+id              0     (4, 0)
+INHERITS        6     -1
+id              0     (5, 0)
+id              0     (5, 0)
+INHERITS        6     -1
+id              0     (21, 0)
+APOCALYPSE      15    -1
+STEAL           11    -1
+id              0     (4, 0)
+APOCALYPSE      15    -1
+CREATE          18    -1
+id              0     (17, 1)
+FROM            19    -1
+id              0     (27, 0)
+AND             10    -1
+id              0     (28, 0)
+TOO             20    -1
+GENESIS         21    -1
+GRADES          9     -1
+const           1     (22, 0)
+AND             10    -1
+id              0     (23, 0)
+FROM            19    -1
+id              0     (27, 0)
+AND             10    -1
+id              0     (28, 0)
+TOO             20    -1
+GRADES          9     -1
+const           1     (5, 1)
+AND             10    -1
+id              0     (27, 0)
+DIFF            25    -1
+id              0     (28, 0)
+GRADES          9     -1
+const           1     (1, 0)
+AND             10    -1
+id              0     (27, 0)
+STATS           26    -1
+id              0     (28, 0)
+APOCALYPSE      15    -1
+RECRUIT         2     -1
+id              0     (17, 2)
+AS              3     -1
+SQUAD           5     -1
+RECRUIT         2     -1
+id              0     (12, 0)
+AS              3     -1
+NUMBER          4     -1
+RECRUIT         2     -1
+id              0     (26, 0)
+AS              3     -1
+NUMBER          4     -1
+RECRUIT         2     -1
+id              0     (21, 1)
+AS              3     -1
+NUMBER          4     -1
+RECRUIT         2     -1
+id              0     (10, 0)
+AS              3     -1
+NUMBER          4     -1
+id              0     (17, 2)
+INHERITS        6     -1
+GANG            22    -1
+const           1     (17, 0)
+AND             10    -1
+const           1     (17, 0)
+AND             10    -1
+const           1     (17, 0)
+AND             10    -1
+const           1     (17, 0)
+AND             10    -1
+const           1     (17, 0)
+SCATTER         23    -1
+id              0     (26, 0)
+INHERITS        6     -1
+const           1     (22, 1)
+id              0     (12, 0)
+INHERITS        6     -1
+const           1     (17, 0)
+GRIND           16    -1
+id              0     (12, 0)
+MOGGED          35    -1
+id              0     (26, 0)
+NONSTOP         17    -1
+SHOVE           8     -1
+id              0     (17, 2)
+AT              7     -1
+id              0     (12, 0)
+id              0     (12, 0)
+INHERITS        6     -1
+id              0     (12, 0)
+ANNEX           27    -1
+const           1     (18, 0)
+APOCALYPSE      15    -1
+id              0     (21, 1)
+INHERITS        6     -1
+const           1     (17, 0)
+id              0     (10, 0)
+INHERITS        6     -1
+id              0     (17, 2)
+AT              7     -1
+const           1     (17, 0)
+id              0     (12, 0)
+INHERITS        6     -1
+const           1     (17, 0)
+GRIND           16    -1
+id              0     (12, 0)
+MOGGED          35    -1
+id              0     (26, 0)
+NONSTOP         17    -1
+id              0     (21, 1)
+INHERITS        6     -1
+id              0     (21, 1)
+ANNEX           27    -1
+id              0     (17, 2)
+AT              7     -1
+id              0     (12, 0)
+id              0     (10, 0)
+INHERITS        6     -1
+id              0     (23, 0)
+FROM            19    -1
+id              0     (10, 0)
+AND             10    -1
+id              0     (17, 2)
+AT              7     -1
+id              0     (12, 0)
+TOO             20    -1
+CONVICTED       12    -1
+id              0     (17, 2)
+AT              7     -1
+id              0     (12, 0)
+BONUS           31    -1
+const           1     (19, 0)
+SAME            32    -1
+const           1     (17, 0)
+GUILTY          13    -1
+GRADES          9     -1
+id              0     (17, 2)
+AT              7     -1
+id              0     (12, 0)
+AND             10    -1
+const           1     (6, 0)
+INNOCENT        14    -1
+GRADES          9     -1
+id              0     (17, 2)
+AT              7     -1
+id              0     (12, 0)
+AND             10    -1
+const           1     (11, 0)
+APOCALYPSE      15    -1
+id              0     (12, 0)
+INHERITS        6     -1
+id              0     (12, 0)
+ANNEX           27    -1
+const           1     (18, 0)
+APOCALYPSE      15    -1
+GRADES          9     -1
+const           1     (1, 1)
+AND             10    -1
+id              0     (21, 1)
+GRADES          9     -1
+const           1     (19, 1)
+AND             10    -1
+id              0     (21, 1)
+SPLIT           30    -1
+id              0     (26, 0)
+GRADES          9     -1
+const           1     (4, 1)
+AND             10    -1
+FROM            19    -1
+id              0     (21, 1)
+MULTIPLY        29    -1
+const           1     (19, 0)
+TOO             20    -1
+INDEPENDENCE    28    -1
+id              0     (17, 2)
+AT              7     -1
+const           1     (17, 0)
+GRADES          9     -1
+const           1     (13, 0)
+AND             10    -1
+id              0     (10, 0)
+CONVICTED       12    -1
+id              0     (10, 0)
+SAME            32    -1
+const           1     (18, 0)
+GUILTY          13    -1
+GRADES          9     -1
+const           1     (17, 3)
+APOCALYPSE      15    -1
+id              0     (17, 1)
+FROM            19    -1
+id              0     (17, 2)
+AT              7     -1
+const           1     (17, 0)
+AND             10    -1
+id              0     (17, 2)
+AT              7     -1
+const           1     (18, 0)
+TOO             20    -1
